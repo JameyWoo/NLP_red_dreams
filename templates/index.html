@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <style>@charset "UTF-8";@import '{{ url_for('static', filename='style.css') }}';</style>
 </head>
 <body>
-    <h1>Hello, world!</h1>
-    {% for article in articles %}
-        <h3><a href="{{ url_for('article', article=article) }}">《{{ article }}》</a> <br><br></h3>
-    {% endfor %}
+    <div id="test" style="
+            padding: 20px 10px 10px;
+            border-radius: 20px;
+            background-color: #fff;
+            box-sizing: border-box;
+            box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+            -webkit-box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+            -moz-box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
+        ">
+        <center><h1>Hello, world!</h1></center>
+        {% for article in articles %}
+            <center><h2>《{{ article }}》</h2></center>
+            <a target="_blank" href="{{ url_for('article', article=article) }}" class="LinkCard">《{{ article }}》</a>
+            <script type="text/javascript" src="https://picture-1256429518.cos.ap-chengdu.myqcloud.com/linkcard.js"></script>
+{#            <h3><a href="{{ url_for('article', article=article) }}">《{{ article }}》</a> <br><br></h3>#}
+        {% endfor %}
+    </div>
 </body>
 </html>
