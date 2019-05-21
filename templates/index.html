@@ -18,7 +18,7 @@
         <center><h1>Hello, world!</h1></center>
         {% for article in articles %}
             <center><h2>《{{ article }}》</h2></center>
-            <a target="_blank" href="{{ url_for('article', article=article) }}" class="LinkCard">《{{ article }}》</a>
+            <a target="" href="{{ url_for('article', article=article) }}" class="LinkCard">《{{ article }}》</a>
             <script type="text/javascript" src="https://picture-1256429518.cos.ap-chengdu.myqcloud.com/linkcard.js"></script>
 {#            <h3><a href="{{ url_for('article', article=article) }}">《{{ article }}》</a> <br><br></h3>#}
         {% endfor %}

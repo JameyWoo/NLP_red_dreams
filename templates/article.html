@@ -30,6 +30,7 @@
         </div>
         <div>
             <h2>评价信息</h2>
+            全部评价：{{ all_comments }} 个<br>
             好评：{{ good_rate }}% <br>
             中评: {{ mid_rate }}% <br>
             差评：{{ bad_rate }}% <br>
@@ -41,6 +42,7 @@
         <div>
             <h2>评论展示</h2>
             {% for comment3 in comments %}
+                <p>-------------------------</p>
                 {% for comment in comment3 %}
                     <p>{{ comment }}</p>
                 {% endfor %}

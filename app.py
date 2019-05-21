@@ -9,12 +9,13 @@ app = Flask(__name__)
 
 @app.route('/<article>')
 def article(article):
-    good_rate, mid_rate, bad_rate = getRates(article)
+    good_rate, mid_rate, bad_rate, all_comments = getRates(article)
     title = article
     abstract = getAbstract(article)
     comments = getComments(article)
     name, english_name, author = getBasicInfo(article)
     score = getScore(article)
+    comment_type = ['好评', '差评', '中评']
     return render_template('article.html', **locals())
 
 @app.route('/test')
