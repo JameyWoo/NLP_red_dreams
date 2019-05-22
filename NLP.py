@@ -22,6 +22,9 @@ def getComments(filename): # 获取评论列表、评论中所有的单词，以
     return comments, words
 
 def getWordCloud(text_str, picture_name): # 生成词云
+    reps = ['book', 'one', 'Chinese', 'story']
+    for each in reps:
+        text_str = text_str.replace(each, '')
     wordcloud = WordCloud(background_color="white",width=1980, height=1080, margin=2, random_state=42).generate(text_str)
     wordcloud.to_file(picture_name)
     return
@@ -87,7 +90,7 @@ def get_p_or_n(comments, filename): # 获取情绪极化评分，并划定阈值
     csvfile.insert(1, 'stars', stars)
     csvfile.to_csv('./static/csvs/' + filename.replace('.csv', '_result.csv'), encoding='utf-8')
     stars = star_cnt
-    print(stars)
+    # print(stars)
 
     # 将一些数量值写入到json文件中
     infomation = {'positive': positive, 'negative': negative, 'middle': middle, 'star1': stars[0],\
@@ -101,7 +104,7 @@ def main():
         filename = bookname + ".csv"
         comments, words = getComments('./static/csvs/' + filename)
         print(len(comments))
-        # getWordCloud(words, "./static/wordclouds/wordcloud_of_%s.png"%bookname)
+        getWordCloud(words, "./static/wordclouds/wordcloud_of_%s.png"%bookname)
         get_p_or_n(comments, filename)
 
 if __name__ == "__main__":
