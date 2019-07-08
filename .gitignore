@@ -3,3 +3,4 @@ src/tmp
 __pycache__
 doc/_build
 doc_test
+_build
