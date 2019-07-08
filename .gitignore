@@ -1,6 +1,4 @@
 src/tmp
 .idea
 __pycache__
-doc/_build
-doc_test
-_build
+docs/_build
