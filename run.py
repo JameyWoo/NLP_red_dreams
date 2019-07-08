@@ -13,31 +13,31 @@ import sentiment_analysis_test
 from Filenames import Filenames
 
 
-def init():
-    version = 'v0.5'  # 添加版本
+def init_one(version, id):  # 初始化版本信息与文件名格式. 一本书
+    # version = 'v0.5'  # 添加版本
     # key = 'The+Tale+of+Genji'  # 源氏物语
     name = 'Dream+of+the+Red+Chamber'  # 红楼梦
-    file = Filenames(version=version, id=2)
-    file.set_name(name)
+    file = Filenames(version=version, id=id)
+    # file.set_name(file.id2name(id))
+    print("now {}\n".format(file.name))
     return file
 
 
-def main():
-    file = init() # 初始化版本信息与文件名格式
-
+def run_one_book(file):
     # 获取评论页的urls
     request_urls = get_urls.get_source_urls(file.name)
     urls_set = set()
     for each in request_urls:
         get_urls.get_result_urls(each, urls_set)
     urls = list(urls_set)
-    print("---urls get down---")
+    print("{} urls".format(len(urls)))
+    print("---urls get down---\n")
 
     # 获取评论
     comments = get_comments.Comment()
     # get_comments(urls[1], comments=comments) # 测试一个url的爬取
     for i in range(len(urls)):
-        print("-----第{}个url-----".format(i + 1))
+        print("-----第{}个url of {}: \"{}\"-----".format(i + 1, file.id, file.name.replace('+', ' ')))
         get_comments.get_comments(urls[i], comments)
     comments.write('src/%s_review_info.csv' % file.prefix)
 
@@ -50,6 +50,17 @@ def main():
     sentiment_analysis_test.write2file(analysis_results, file.prefix)
     print(len(analysis_results))
 
+
+def run_all_books(version):
+    for i in range(5, 7):  # 爬取所有或部分的书, 自己设定范围
+        one_book = init_one(version=version, id=i)
+        run_one_book(one_book)
+
+
+def main():
+    # one_book = init_one(version='v0.6', id=3)
+    # run_one_book(one_book)
+    run_all_books(version='v0.6')
 
 if __name__ == "__main__":
     main()

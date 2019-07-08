@@ -75,24 +75,27 @@ def get_comments(one_url, comments):
         "Connection": "keep-alive",
         "Accept-Charset": "GB2312,utf-8;q=0.7,*;q=0.7"
     }
-    source = requests.get(one_url, headers=headers).text
-    html = etree.HTML(source)
-    # print(source)
-    tmp_url = one_url[-10:]
-    print(tmp_url)
-    with open("src/tmp/%s.html" % tmp_url, 'w+', encoding='utf-8') as file:
-        file.write(source)
-    file.close()
-    results = html.xpath('//div[@class="a-row a-spacing-small review-data"]/span/span/text()')
-    # 一个star的问题还没有解决
-    stars = re.findall(r'title="(.*) out of 5 stars"', source)
-    print(stars)
-    print("len of results: ", len(results))
-    print("len of stars: ", len(stars))
-    for i in range(len(results)):
-        comments.texts.append(results[i].replace('\n', ' '))
-        comments.stars.append(0)
-    print(comments)
+    try:
+        source = requests.get(one_url, headers=headers, timeout=3).text
+        html = etree.HTML(source)
+        # print(source)
+        tmp_url = one_url[-10:]
+        print(tmp_url)
+        with open("src/tmp/%s.html" % tmp_url, 'w+', encoding='utf-8') as file:
+            file.write(source)
+        file.close()
+        results = html.xpath('//div[@class="a-row a-spacing-small review-data"]/span/span/text()')
+        # 一个star的问题还没有解决
+        stars = re.findall(r'title="(.*) out of 5 stars"', source)
+        print(stars)
+        print("len of results: ", len(results))
+        print("len of stars: ", len(stars))
+        for i in range(len(results)):
+            comments.texts.append(results[i].replace('\n', ' '))
+            comments.stars.append(0)
+        print(comments)
+    except:
+        pass
     return
 
 
@@ -112,7 +115,7 @@ def main():
     comments = Comment()
     # get_comments(urls[1], comments=comments) # 测试一个url的爬取
     for i in range(len(urls)):
-        print("-----第{}个url-----".format(i + 1))
+        print("-----第{}个url of {}-----".format(i + 1, file.name))
         get_comments(urls[i], comments)
     comments.write('src/%s_review_info.csv' % file.prefix)
 
