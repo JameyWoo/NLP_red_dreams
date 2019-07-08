@@ -88,7 +88,7 @@ def get_comments(one_url, comments):
         # 一个star的问题还没有解决
         stars = re.findall(r'title="(.*) out of 5 stars"', source)
         print(stars)
-        print("len of results: ", len(results))
+        print("len of results: ", len(results)) # TODO: 好像这里都错了, 一个页面最多只有十个评论啊.
         print("len of stars: ", len(stars))
         for i in range(len(results)):
             comments.texts.append(results[i].replace('\n', ' '))
@@ -115,6 +115,7 @@ def main():
     comments = Comment()
     # get_comments(urls[1], comments=comments) # 测试一个url的爬取
     for i in range(len(urls)):
+        # TODO: 我是不是忘记了在一个评论url上翻页?
         print("-----第{}个url of {}-----".format(i + 1, file.name))
         get_comments(urls[i], comments)
     comments.write('src/%s_review_info.csv' % file.prefix)

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 """
-@file: run.py.py
+@file: run.py
 @time: 2019/7/8 9:47
 @author: 姬小野
 @version: 0.1
@@ -19,7 +19,7 @@ def init_one(version, id):  # 初始化版本信息与文件名格式. 一本书
     name = 'Dream+of+the+Red+Chamber'  # 红楼梦
     file = Filenames(version=version, id=id)
     # file.set_name(file.id2name(id))
-    print("now {}\n".format(file.name))
+    print("now: {}\n".format(file.name))
     return file
 
 
@@ -58,9 +58,9 @@ def run_all_books(version):
 
 
 def main():
-    # one_book = init_one(version='v0.6', id=3)
-    # run_one_book(one_book)
-    run_all_books(version='v0.6')
+    one_book = init_one(version='v0.6', id=-1)
+    run_one_book(one_book)
+    # run_all_books(version='v0.6')
 
 if __name__ == "__main__":
     main()

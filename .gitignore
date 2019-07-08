@@ -2,3 +2,4 @@ src/tmp
 .idea
 __pycache__
 doc
+doc_test

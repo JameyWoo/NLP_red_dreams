@@ -17,12 +17,13 @@ class Filenames:
         2. 暂时莫言的作品也没放进去, 因为需要很多的筛选. 比如<<丰乳肥臀>>, 有很多sex内容.
         """
         self.name2id = { # 书名: 编号 的字典
+            'A+Song+of+Ice+and+Fire': -1,  # 冰与火之歌, 看看这个大热门
             'The+Tale+of+Genji': 0,  # 源氏物语
             'Dream+of+the+Red+Chamber': 1,  # 红楼梦
             'Romance+of+the+Three+Kingdoms': 2,  # 三国演义
             'Outlaws+of+the+Marsh': 3,  # 水浒传
             'Journey+to+the+West': 4,  # 西游记
-            'Rickshaw+Boy': 5,  # 骆驼祥子
+            'Rickshaw+Boy': 5,  # 骆驼祥子. 很少, 只有一百来条
             'Dawn+Blossoms+Plucked+at+Dusk': 6,  # 朝花夕拾, 看了看, 基本上没有人买啊, 也没有人评论
         }
         self.id = id
